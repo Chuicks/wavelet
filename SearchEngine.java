@@ -16,8 +16,15 @@ class Handler implements URLHandler {
         }
         else if (url.getPath().contains("/search")) {
             String[] parameters = url.getQuery().split("=");
-            for(int i=0; i < added.size(); i++){
-                return added.get(i);
+            if (parameters[0].equals("s")) {
+                String result = "";
+                String search = parameters[1];
+                for(int i = 0; i < added.size(); i++){
+                    if(added.get(i).indexOf(search) != -1){
+                        result = result + added.get(i) + " ";
+                    }
+                }
+                return result;
             }
         }
         return "404 Not Found!";
